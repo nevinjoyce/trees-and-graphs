@@ -7,13 +7,20 @@ struct node
 	struct node *left;
 	struct node *right;
 };
-struct node *newNode(int val)
-{
+struct node *create()
+{	
+	int x;
 	struct node *new=(struct node*)malloc(sizeof(struct node));
-	new->data=val;
-	new->left=NULL;
-	new->right=NULL;
-	return(new);
+	printf("\nEnter Data (Type -1 for no node): ");
+	scanf("%d",&x);
+	if(x==-1)
+		return 0;
+	new->data=x;
+	printf("\nleft child of %d\n",x);
+	new->left=create();
+	printf("\nright child of %d\n",x);
+	new->right=create();
+	return new;
 }
 void preorder(struct node *root)
 {
@@ -42,14 +49,7 @@ void postorder(struct node *root)
 void main()
 {
 	int ch;
-	struct node *root;
-	root=newNode(1);
-	root->left=newNode(2);
-	root->right=newNode(3);
-	root->left->left=newNode(4);
-	root->left->right=newNode(5);
-	root->right->left=newNode(6);
-	root->right->right=newNode(7);
+	struct node *root=create();
 	while(1)
 	{
 		printf("\nTraversal Options:\n1. Preorder\n2. Inorder\n3. Postorder\n4. Exit\nEnter your Choice: ");
